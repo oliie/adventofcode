@@ -976,4 +976,4 @@ $ cd ..
 $ cd nmtjtd
 $ ls
 47477 dvqmqlgw.ths
-51081 vqgsglwq`.split("\n");
+51081 vqgsglwq`;

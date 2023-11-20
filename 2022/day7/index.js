@@ -1,11 +1,4 @@
-import input from "./input.ts";
-
-type Directory = {
-  parent: string | null;
-  subDirs: string[];
-  totalSize: number;
-  filesSize: number;
-};
+import input from "./input.js";
 
 const exampleInput = `$ cd /
 $ ls
@@ -29,12 +22,24 @@ $ ls
 4060174 j
 8033020 d.log
 5626152 d.ext
-7214296 k`.split("\n");
+7214296 k`;
 
-const fs: { [key: string]: Directory } = {};
-const cd: string[] = [];
+const data = exampleInput;
 
-input.forEach((line) => {
+// type Directory = {
+//   parent: string | null;
+//   subDirs: string[];
+//   totalSize: number;
+//   filesSize: number;
+// };
+
+// { [key: string]: Directory }
+const fs = {};
+
+// string[]
+const cd = [];
+
+data.split("\n").forEach((line) => {
   const isCD = line.startsWith("$ cd");
   const isDir = line.startsWith("dir");
   const isFile = /^[0-9]/.test(line);
@@ -88,7 +93,8 @@ Object.keys(fs).forEach((dirName) => {
   });
 });
 
-const dirsMaxSize: number[] = [];
+// number[]
+const dirsMaxSize = [];
 
 Object.keys(fs).forEach((dirName) => {
   if (fs[dirName].totalSize <= 100000) {

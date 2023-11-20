@@ -68,9 +68,9 @@ function getDirectionalScenicScore(tree, direction) {
 
 function getScenicScore(row, column, x, y, tree) {
   const up = getDirectionalScenicScore(tree, column.slice(null, y).reverse());
-  const right = getDirectionalScenicScore(tree, row.slice(x + 1));
   const down = getDirectionalScenicScore(tree, column.slice(y + 1));
   const left = getDirectionalScenicScore(tree, row.slice(null, x).reverse());
+  const right = getDirectionalScenicScore(tree, row.slice(x + 1));
 
   return up * right * down * left;
 }

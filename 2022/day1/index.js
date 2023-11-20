@@ -1,6 +1,6 @@
-import input from "./input.ts";
+import input from "./input.js";
 
-const totalCalories: number[] = [];
+const totalCalories = [];
 let currentCalories = 0;
 
 input.forEach((n) => {

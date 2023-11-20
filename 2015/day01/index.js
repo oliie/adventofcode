@@ -1,21 +1,37 @@
 import input from "./input.js";
 
 function puzzleOne() {
-  var floors = input.split("");
-  var currentlevel = 0;
+  const floors = input.split("");
+  let currentlevel = 0;
 
-  for (var i = 0; i < floors.length; i++) {
-    var direction = floors[i];
-    var isUp = direction === "(";
+  floors.forEach((direction) => {
+    const isUp = direction === "(";
 
-    if (isUp) {
-      currentlevel++;
-    } else {
-      currentlevel--;
-    }
-  }
+    isUp ? currentlevel++ : currentlevel--;
+  });
 
   return currentlevel;
 }
 
+function puzzleTwo() {
+  const floors = input.split("");
+  let currentlevel = 0;
+  let basementPosition = null;
+
+  for (let i = 0; i < floors.length; i++) {
+    const direction = floors[i];
+    const isUp = direction === "(";
+
+    isUp ? currentlevel++ : currentlevel--;
+
+    if (currentlevel < 0) {
+      basementPosition = i + 1;
+      break;
+    }
+  }
+
+  return basementPosition;
+}
+
 console.log(`End destination is ${puzzleOne()}`);
+console.log(`Entering basement at position ${puzzleTwo()}`);

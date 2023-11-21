@@ -42,12 +42,17 @@ function puzzleOne() {
   return nice;
 }
 
-/**
- * It contains a pair of any two letters that appears at least twice in the string without overlapping,
- * like xyxy (xy) or aabcdefgaa (aa), but not like aaa (aa, but it overlaps).
- *
- * ✅ It contains at least one letter which repeats with exactly one letter between them, like xyx, abcdefeghi (efe), or even aaa.
- */
+// Solution from GPT
+// function isNicePart2(str) {
+//   // Check for the first condition: Two non-overlapping pairs of the same letter
+//   const condition1 = /(..).*\1/.test(str);
+
+//   // Check for the second condition: One letter repeated with one letter between them
+//   const condition2 = /(.).\1/.test(str);
+
+//   // Return true if both conditions are met
+//   return condition1 && condition2;
+// }
 
 function isActuallyNice(str) {
   const parts = str.split("");

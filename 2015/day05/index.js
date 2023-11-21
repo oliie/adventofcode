@@ -6,16 +6,21 @@ jchzalrnumimnmhp
 haegwjzuvuyypxyu
 dvszwmarrgswjxmb`;
 
-const data = input.split("\n");
+const actualExample = `qjhvhtzxzqqjkmpb
+xxyxx
+uurcxstgmygtbstg
+ieodomkazucvgmuy`;
+
+const data = actualExample.split("\n");
 
 const naughty = ["ab", "cd", "pq", "xy"];
 const vowels = ["a", "e", "i", "o", "u"];
 
 function isNice(str) {
+  const parts = str.split("");
   let vowelCount = 0;
   let doubles = 0;
   let lastChar = null;
-  const parts = str.split("");
 
   for (const char of parts) {
     if (lastChar === char) doubles++;
@@ -37,4 +42,37 @@ function puzzleOne() {
   return nice;
 }
 
+/**
+ * It contains a pair of any two letters that appears at least twice in the string without overlapping,
+ * like xyxy (xy) or aabcdefgaa (aa), but not like aaa (aa, but it overlaps).
+ *
+ * It contains at least one letter which repeats with exactly one letter between them, like xyx, abcdefeghi (efe), or even aaa.
+ */
+
+function isActuallyNice(str) {
+  const parts = str.split("");
+  let repeatedWithGap = 0;
+  let repeatedPair = 0;
+  let lastChars = [null, null];
+
+  for (let i = 0; i < parts.length; i++) {
+    const char = parts[i];
+
+    if (lastChars[i % 2] === char) repeatedPair++;
+
+    lastChars[i % 2] = char;
+  }
+
+  return repeatedPair >= 1;
+}
+
+function puzzleTwo() {
+  let nice = 0;
+
+  for (const str of data) if (isActuallyNice(str)) nice++;
+
+  return nice;
+}
+
 console.log(`Number of nice strings is: ${puzzleOne()}`);
+console.log(`Number of ACTUAL nice strings is: ${puzzleTwo()}`);

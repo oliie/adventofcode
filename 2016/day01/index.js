@@ -18,10 +18,10 @@ const Compass = {
   WEST: 3,
 };
 
-let facing = Compass.NORTH;
-
 function puzzleOne() {
+  // [x, y]
   const coords = [0, 0];
+  let facing = Compass.NORTH;
 
   instructions.forEach((direction) => {
     const turn = direction[0];
@@ -41,4 +41,62 @@ function puzzleOne() {
   return Math.abs(coords[0]) + Math.abs(coords[1]);
 }
 
+function puzzleTwo() {
+  // [x, y]
+  const coords = [0, 0];
+  const visited = new Set();
+  let facing = Compass.NORTH;
+  let firstVisitedTwice = null;
+
+  instructions.forEach((direction) => {
+    const turn = direction[0];
+    const distance = +direction.slice(1);
+
+    turn === "R" ? facing++ : facing--;
+
+    if (facing < 0) facing = 3;
+    if (facing > 3) facing = 0;
+
+    const passingBlocks = [...Array(distance).fill(1)];
+
+    const checkIfVisited = (position) => {
+      if (!firstVisitedTwice && visited.has(position.toString())) {
+        firstVisitedTwice = structuredClone(position);
+      } else {
+        visited.add(position.toString());
+      }
+    };
+
+    if (facing === Compass.NORTH) {
+      passingBlocks.forEach((_) => {
+        coords[1] -= 1;
+        checkIfVisited(coords);
+      });
+    }
+    if (facing === Compass.EAST) {
+      passingBlocks.forEach((_) => {
+        coords[0] += 1;
+        checkIfVisited(coords);
+      });
+    }
+    if (facing === Compass.SOUTH) {
+      passingBlocks.forEach((_) => {
+        coords[1] += 1;
+        checkIfVisited(coords);
+      });
+    }
+    if (facing === Compass.WEST) {
+      passingBlocks.forEach((_) => {
+        coords[0] -= 1;
+        checkIfVisited(coords);
+      });
+    }
+  });
+
+  return Math.abs(firstVisitedTwice[0]) + Math.abs(firstVisitedTwice[1]);
+}
+
 console.log(`Blocks away from HQ: ${JSON.stringify(puzzleOne())}`);
+console.log(
+  `Blocks away from position visited twice: ${JSON.stringify(puzzleTwo())}`
+);

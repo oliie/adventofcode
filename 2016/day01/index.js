@@ -11,7 +11,14 @@ const instructions = input.split(", ");
  * 3 = West
  */
 
-let facing = 0;
+const Compass = {
+  NORTH: 0,
+  EAST: 1,
+  SOUTH: 2,
+  WEST: 3,
+};
+
+let facing = Compass.NORTH;
 
 function puzzleOne() {
   const coords = [0, 0];
@@ -25,15 +32,10 @@ function puzzleOne() {
     if (facing < 0) facing = 3;
     if (facing > 3) facing = 0;
 
-    if (facing === 0) {
-      coords[1] -= distance;
-    } else if (facing === 1) {
-      coords[0] += distance;
-    } else if (facing === 2) {
-      coords[1] += distance;
-    } else if (facing === 3) {
-      coords[0] -= distance;
-    }
+    if (facing === Compass.NORTH) coords[1] -= distance;
+    if (facing === Compass.EAST) coords[0] += distance;
+    if (facing === Compass.SOUTH) coords[1] += distance;
+    if (facing === Compass.WEST) coords[0] -= distance;
   });
 
   return Math.abs(coords[0]) + Math.abs(coords[1]);

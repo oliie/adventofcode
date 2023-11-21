@@ -29,8 +29,7 @@ function puzzleOne() {
 
     turn === "R" ? facing++ : facing--;
 
-    if (facing < 0) facing = 3;
-    if (facing > 3) facing = 0;
+    facing = (facing + 4) % 4;
 
     if (facing === Compass.NORTH) coords[1] -= distance;
     if (facing === Compass.EAST) coords[0] += distance;
@@ -54,8 +53,7 @@ function puzzleTwo() {
 
     turn === "R" ? facing++ : facing--;
 
-    if (facing < 0) facing = 3;
-    if (facing > 3) facing = 0;
+    facing = (facing + 4) % 4;
 
     const passingBlocks = [...Array(distance).fill(1)];
 

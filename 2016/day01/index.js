@@ -4,13 +4,6 @@ const example = "R5, L5, R5, R3";
 
 const instructions = input.split(", ");
 
-/**
- * 0 = North
- * 1 = East
- * 2 = South
- * 3 = West
- */
-
 const Compass = {
   NORTH: 0,
   EAST: 1,

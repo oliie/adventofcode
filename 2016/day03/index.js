@@ -58,4 +58,4 @@ function puzzleTwo() {
 }
 
 console.log(`Number of valid triangles is: ${puzzleOne()}`);
-console.log(`Number of valid grouped triangles is: ${puzzleTwo()}`);
+console.log(`Number of valid vertically triangles is: ${puzzleTwo()}`);

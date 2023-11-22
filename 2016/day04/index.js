@@ -34,7 +34,35 @@ function isRealRoom(encrypt, checksum) {
   return encryptChecksum === checksum;
 }
 
+function puzzleTwo(rooms) {
+  const atoz = "abcdefghijklmnopqrstuvwxyz".split("");
+  const decryptedRooms = [];
+
+  rooms.forEach((room) => {
+    const [encrypts, checksum] = room;
+    let decrypted = "";
+
+    encrypts.forEach((encrypt) => {
+      encrypt.split("").forEach((char) => {
+        const charIndex = atoz.indexOf(char);
+        const newIndex = (charIndex + checksum) % atoz.length;
+        decrypted += atoz[newIndex];
+      });
+      decrypted += " ";
+    });
+
+    decryptedRooms.push([decrypted.trim(), checksum]);
+  });
+
+  const filteredRooms = decryptedRooms.filter((room) =>
+    room[0].includes("north")
+  );
+
+  console.log(`North pole objects are stored in ${filteredRooms[0][1]}`);
+}
+
 function puzzleOne() {
+  const realRooms = [];
   let sectorIdSum = 0;
 
   data.map((room) => {
@@ -44,10 +72,15 @@ function puzzleOne() {
     const checksum = sectorIdAndChecksum.split("[")[1].split("]")[0];
     const fullEncrypt = encrypts.join("");
 
-    if (isRealRoom(fullEncrypt, checksum)) sectorIdSum += sectorId;
+    if (isRealRoom(fullEncrypt, checksum)) {
+      realRooms.push([encrypts, sectorId]);
+      sectorIdSum += sectorId;
+    }
   });
 
-  return sectorIdSum;
+  console.log(`Total sector sum of real rooms is: ${sectorIdSum}`);
+
+  puzzleTwo(realRooms);
 }
 
-console.log(`Total sector sum of real rooms is: ${puzzleOne()}`);
+puzzleOne();

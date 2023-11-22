@@ -41,6 +41,14 @@ function puzzleTwo() {
   const xy = [0, 2];
   const code = [];
 
+  /**
+   * Smart way is to check potential errors instead of complex if statements
+   */
+  // const canMove = (pos) => {
+  // const errors = [-1, null, undefined];
+  // return !errors.includes(keypad2[pos[1]]?.[pos[0]]);
+  // };
+
   const canMove = (pos) => keypad2[pos[1]]?.[pos[0]] != null;
 
   for (const instruction of instructions) {

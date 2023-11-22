@@ -1,3 +1,4 @@
+// https://adventofcode.com/2022/day/8
 import input from "./input.js";
 const example = `30373
 25512

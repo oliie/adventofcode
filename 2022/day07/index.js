@@ -1,3 +1,4 @@
+// https://adventofcode.com/2022/day/7
 import input from "./input.js";
 
 const exampleInput = `$ cd /

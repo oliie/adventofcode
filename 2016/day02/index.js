@@ -1,3 +1,4 @@
+// https://adventofcode.com/2016/day/2
 import input from "./input.js";
 
 const instructions = input.split("\n");

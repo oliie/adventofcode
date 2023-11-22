@@ -50,7 +50,7 @@ function puzzleTwo() {
 
     const passingBlocks = [...Array(distance).fill(1)];
 
-    const checkIfVisited = (position) => {
+    const addOrIsVisited = (position) => {
       if (!firstVisitedTwice && visited.has(position.toString())) {
         firstVisitedTwice = structuredClone(position);
       } else {
@@ -61,25 +61,25 @@ function puzzleTwo() {
     if (facing === Compass.NORTH) {
       passingBlocks.forEach((_) => {
         coords[1] -= 1;
-        checkIfVisited(coords);
+        addOrIsVisited(coords);
       });
     }
     if (facing === Compass.EAST) {
       passingBlocks.forEach((_) => {
         coords[0] += 1;
-        checkIfVisited(coords);
+        addOrIsVisited(coords);
       });
     }
     if (facing === Compass.SOUTH) {
       passingBlocks.forEach((_) => {
         coords[1] += 1;
-        checkIfVisited(coords);
+        addOrIsVisited(coords);
       });
     }
     if (facing === Compass.WEST) {
       passingBlocks.forEach((_) => {
         coords[0] -= 1;
-        checkIfVisited(coords);
+        addOrIsVisited(coords);
       });
     }
   });

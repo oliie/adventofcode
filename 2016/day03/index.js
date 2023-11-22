@@ -7,9 +7,14 @@ function puzzleOne() {
   let validTriangles = 0;
 
   triangles.forEach((triangle) => {
-    const t = triangle.split(/\s+/gm);
+    const [a, b, c] = triangle
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((numString) => +numString);
 
-    console.log(t);
+    const isValidTriangle = a + b > c && b + c > a && c + a > b;
+
+    isValidTriangle && validTriangles++;
   });
 
   return validTriangles;

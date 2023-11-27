@@ -20,8 +20,8 @@ CC -> N
 CN -> C`;
 
 const data = example;
-let template = data.split("\n")[0];
 
+let template = data.split("\n")[0];
 let templates = {};
 const rules = {};
 
@@ -54,7 +54,7 @@ function puzzle() {
       const iterations = templates[pair];
 
       for (let j = 0; j < iterations; j++) {
-        const nextPairsString = pair.split("").join(rules[pair]);
+        const nextPairsString = pair[0] + rules[pair] + pair[1];
         const first = nextPairsString[0] + nextPairsString[1];
         const second = nextPairsString[1] + nextPairsString[2];
 

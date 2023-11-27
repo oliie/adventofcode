@@ -41,19 +41,26 @@ for (let i = 0; i < template.length - 1; i++) {
 function puzzle() {
   const sum = 0;
   const charCount = {};
+  const steps = 10;
 
-  for (let i = 0; i < 10; i++) {
+  template.split("").forEach((char) => {
+    charCount[char] = charCount[char] ? charCount[char] + 1 : 1;
+  });
+
+  for (let i = 0; i < steps; i++) {
     const nextTemplates = {};
 
     for (const pair of Object.keys(templates)) {
       const iterations = templates[pair];
 
       for (let j = 0; j < iterations; j++) {
-        charCount[pair[0]] ? charCount[pair[0]]++ : (charCount[pair[0]] = 1);
-        charCount[pair[1]] ? charCount[pair[1]]++ : (charCount[pair[1]] = 1);
         const nextPairsString = pair.split("").join(rules[pair]);
         const first = nextPairsString[0] + nextPairsString[1];
         const second = nextPairsString[1] + nextPairsString[2];
+
+        charCount[rules[pair]] = charCount[rules[pair]]
+          ? charCount[rules[pair]] + 1
+          : 1;
 
         nextTemplates[first]
           ? nextTemplates[first]++

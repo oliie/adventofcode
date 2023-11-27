@@ -82,3 +82,5 @@ function puzzle() {
 console.log(
   `The most common element minus the least common element is ${puzzle()} after 10 iterations.`
 );
+
+// https://github.com/manguicho/AOC2021/blob/main/day14.js

@@ -29,8 +29,8 @@ data
   .split("\n\n")[1]
   .split("\n")
   .forEach((rule) => {
-    const [input, output] = rule.split(" -> ");
-    pairs[input] = output;
+    const [pair, insert] = rule.split(" -> ");
+    pairs[pair] = insert;
   });
 
 for (let i = 0; i < template.length - 1; i++) {

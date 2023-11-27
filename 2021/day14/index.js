@@ -21,9 +21,9 @@ CN -> C`;
 
 const data = example;
 
+const rules = {};
 let template = data.split("\n")[0];
 let templates = {};
-const rules = {};
 
 data
   .split("\n\n")[1]

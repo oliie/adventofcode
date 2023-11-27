@@ -22,41 +22,52 @@ CN -> C`;
 const data = example;
 let template = data.split("\n")[0];
 
-let templates = [];
-const pairs = {};
+let templates = {};
+const rules = {};
 
 data
   .split("\n\n")[1]
   .split("\n")
   .forEach((rule) => {
     const [pair, insert] = rule.split(" -> ");
-    pairs[pair] = insert;
+    rules[pair] = insert;
   });
 
 for (let i = 0; i < template.length - 1; i++) {
-  templates.push(template.slice(i, i + 2));
+  const pair = template[i] + template[i + 1];
+  templates[pair] = 1;
 }
 
 function puzzle() {
   const sum = 0;
-  const pairCount = {};
+  const charCount = {};
 
   for (let i = 0; i < 10; i++) {
-    const nextTemplates = [];
+    const nextTemplates = {};
 
-    for (const t of templates) {
-      pairCount[t[0]] ? pairCount[t[0]]++ : (pairCount[t[0]] = 1);
-      pairCount[t[1]] ? pairCount[t[1]]++ : (pairCount[t[1]] = 1);
-      const nextPairsString = t.split("").join(pairs[t]);
-      const first = nextPairsString[0] + nextPairsString[1];
-      const second = nextPairsString[1] + nextPairsString[2];
-      nextTemplates.push(first, second);
+    for (const pair of Object.keys(templates)) {
+      const iterations = templates[pair];
+
+      for (let j = 0; j < iterations; j++) {
+        charCount[pair[0]] ? charCount[pair[0]]++ : (charCount[pair[0]] = 1);
+        charCount[pair[1]] ? charCount[pair[1]]++ : (charCount[pair[1]] = 1);
+        const nextPairsString = pair.split("").join(rules[pair]);
+        const first = nextPairsString[0] + nextPairsString[1];
+        const second = nextPairsString[1] + nextPairsString[2];
+
+        nextTemplates[first]
+          ? nextTemplates[first]++
+          : (nextTemplates[first] = 1);
+        nextTemplates[second]
+          ? nextTemplates[second]++
+          : (nextTemplates[second] = 1);
+      }
     }
 
     templates = nextTemplates;
   }
 
-  console.log(pairCount);
+  console.log(charCount);
 
   return sum;
 }

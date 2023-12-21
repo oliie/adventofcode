@@ -40,4 +40,29 @@ function puzzleOne() {
   return sum;
 }
 
-console.log(puzzleOne());
+function puzzleTwo() {
+  let sum = 0;
+
+  data.forEach((row) => {
+    const game = row.split(": ");
+    const cubes = game[1].split(/[;,]/g).map((s) => s.trim());
+    const shows = { red: [], green: [], blue: [] };
+
+    cubes.forEach((cube) => {
+      const [count, color] = cube.split(" ");
+      shows[color].push(+count);
+    });
+
+    const multipliedCubes =
+      Math.max(...shows.red) *
+      Math.max(...shows.green) *
+      Math.max(...shows.blue);
+
+    sum += multipliedCubes;
+  });
+
+  return sum;
+}
+
+console.log(`The sum of each possible game ids is: ${puzzleOne()}`);
+console.log(`The sum of minimum set of cubes is: ${puzzleTwo()}`);
